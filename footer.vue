@@ -9,7 +9,11 @@
                 <div class="col-xs-12 col-sm-6 col-md-4 footer_newsletter">
                     <p class="footer_heading">NEWSLETTER SUBSCRIPTION</p>
                     <p>Stay up to date on the latest news from {{ property.name }}!</p>
-                    <form id="mktoForm_3303"></form>
+                    <form id="subForm" class="js-cm-form" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="92D4C54F0FEC16E5ADC2B1904DE9ED1AA3347152F9991F31C8A934FDD9BA30CC033C02BFBC220E7F60780A2E598729018F5D9F993EBAFF5D653D06313DE4F1ED">	
+                        <label class="accessibility" for="fieldEmail">Email</label>
+                        <input id="fieldEmail" name="cm-ydiuhyt-ydiuhyt" type="email" class="js-cm-email-input" placeholder="Your Email" required />
+                        <button id="newsletter_submit" class="js-cm-submit-button" type="submit">Subscribe To Our Newsletter</button>
+                    </form>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <p class="footer_heading">FOLLOW US ON FACEBOOK</p>
@@ -44,18 +48,14 @@
 </template>
 
 <script>
-    define(["Vue", "vuex", "moment", "moment-timezone", "vue-moment", "json!site.json", "vue!vue_facebook"], function (Vue, Vuex, moment, tz, VueMoment, site, vueFacebookPage) {
+    define(["Vue", "vuex", "moment", "moment-timezone", "vue-moment", "json!site.json", "vue!vue_facebook", "campaignMonitor"], function (Vue, Vuex, moment, tz, VueMoment, site, vueFacebookPage, campaignMonitor) {
         return Vue.component("footer-component", {
             template: template, // the variable template will be injected,
             data: function data() {
                 return {
                     dataLoaded: false,
-                    siteInfo: site,
-                    newsletter_email: ""
+                    siteInfo: site
                 }
-            },
-            mounted () {
-                window.MktoForms2.loadForm("//app-sj03.marketo.com", "561-LJY-710", 3303);
             },
             created () {
                 this.dataLoaded = true;
@@ -63,21 +63,13 @@
             computed: {
                 ...Vuex.mapGetters([
                     'property',
-                    'timezone',
-                    'findRepoByName'
+                    'timezone'
                 ]),
                 copyright_year() {
                     return moment().year();
                 },
                 getPropertyAddress() {
                     return this.property.address1 + ' ' + this.property.city + ' ' + this.property.country + ' ' + this.property.province_state
-                }
-            },
-            methods: {
-                newsletterRoute() {
-                    this.show_menu = false;
-                    this.$router.push("/newsletter?email=" + this.newsletter_email);
-                    this.newsletter_email = "";
                 }
             }
         });
