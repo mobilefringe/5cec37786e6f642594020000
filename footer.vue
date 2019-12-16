@@ -29,6 +29,7 @@
                         <router-link to="/pages/themarketplaceattheenclave-retailer-hub/" exact>Retailer Hub</router-link> |
                         <router-link to="/terms-of-use" exact>Terms of Use</router-link> |
                         <router-link to="/privacy-policy" exact>Privacy Policy</router-link>
+                        <a :href="siteInfo.privacy" target="_blank">Privacy Policy</a>
                     </p>
                 </div>
                 <div>
