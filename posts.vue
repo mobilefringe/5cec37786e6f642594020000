@@ -53,6 +53,7 @@
             },
             created() {
                 this.loadData().then(response => {
+                    console.log("blog", this.blogs)
                     this.dataLoaded = true;
                 });
             },
