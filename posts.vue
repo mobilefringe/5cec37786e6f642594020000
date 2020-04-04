@@ -71,27 +71,30 @@
                     'findBlogByName'
                 ]),
                 postList() {
-                    console.log("blog", this.blogs)
-                    var blog = this.findBlogByName("What's New").posts;
-                    var vm = this;
-                    var temp_blog = [];
-                    _.forEach(blog, function(value, key) {
-                        today = moment().tz(vm.timezone);
-                        webDate = moment(value.publish_date).tz(vm.timezone);
-                        if (today >= webDate) {
-                            if (_.includes(value.image_url, 'missing')) {
-                                value.no_image = true;
-                                value.image_url = vm.siteInfo.default_logo_url;
-                            } else {
-                                value.no_image = false;
+                    var blog = this.findBlogByName("What's New");
+                    if (blog != undefined) {
+                        var posts = blog.posts;
+                        var vm = this;
+                        var temp_blog = [];
+                        _.forEach(posts, function(value, key) {
+                            today = moment().tz(vm.timezone);
+                            webDate = moment(value.publish_date).tz(vm.timezone);
+                            if (today >= webDate) {
+                                if (_.includes(value.image_url, 'missing')) {
+                                    value.no_image = true;
+                                    value.image_url = vm.siteInfo.default_logo_url;
+                                } else {
+                                    value.no_image = false;
+                                }
+                                value.body_short = _.truncate(value.body, { 'length': 100, 'separator': ' ' });
+                                
+                                temp_blog.push(value);
                             }
-                            value.body_short = _.truncate(value.body, { 'length': 100, 'separator': ' ' });
-                            
-                            temp_blog.push(value);
-                        }
-                    });
-                    blog = _.reverse(_.sortBy(temp_blog, function (o) { return o.publish_date }));
-                    return blog
+                        });
+                        
+                        posts = _.reverse(_.sortBy(temp_blog, function (o) { return o.publish_date }));
+                        return posts
+                    }
                 }
             },
             methods: {
