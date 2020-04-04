@@ -4,7 +4,7 @@
         <transition name="fade">
             <div v-if="dataLoaded" v-cloak>
                 <banner-component :page_name="pageName"></banner-component>
-                <div class="main_container margin_30" v-if="postList.length > 0">
+                <div class="main_container margin_30" v-if="postList">
                     <transition-group name="list" tag="div">
                         <div class="row margin_40"  v-for="(item, index) in postList" v-if="showMore > index" :key="index">
                             <div class="col-xs-12 col-sm-4">
@@ -30,13 +30,6 @@
                     <div class="row" v-if="postList && showMore < postList.length" @click="loadMore()">
                         <div class="col-sm-4 col-md-2">
                             <div class="animated_btn">Load More Posts</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_container margin_30" v-else>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>There are no news items posted at this time. Please check back soon!</p>
                         </div>
                     </div>
                 </div>
@@ -71,30 +64,26 @@
                     'findBlogByName'
                 ]),
                 postList() {
-                    var blog = this.findBlogByName("What's New");
-                    if (blog != undefined) {
-                        var posts = blog.posts;
-                        var vm = this;
-                        var temp_blog = [];
-                        _.forEach(posts, function(value, key) {
-                            today = moment().tz(vm.timezone);
-                            webDate = moment(value.publish_date).tz(vm.timezone);
-                            if (today >= webDate) {
-                                if (_.includes(value.image_url, 'missing')) {
-                                    value.no_image = true;
-                                    value.image_url = vm.siteInfo.default_logo_url;
-                                } else {
-                                    value.no_image = false;
-                                }
-                                value.body_short = _.truncate(value.body, { 'length': 100, 'separator': ' ' });
-                                
-                                temp_blog.push(value);
+                    var blog = this.findBlogByName("Main Blog").posts;
+                    var vm = this;
+                    var temp_blog = [];
+                    _.forEach(blog, function(value, key) {
+                        today = moment().tz(vm.timezone);
+                        webDate = moment(value.publish_date).tz(vm.timezone);
+                        if (today >= webDate) {
+                            if (_.includes(value.image_url, 'missing')) {
+                                value.no_image = true;
+                                value.image_url = vm.siteInfo.default_logo_url;
+                            } else {
+                                value.no_image = false;
                             }
-                        });
-                        
-                        posts = _.reverse(_.sortBy(temp_blog, function (o) { return o.publish_date }));
-                        return posts
-                    }
+                            value.body_short = _.truncate(value.body, { 'length': 100, 'separator': ' ' });
+                            
+                            temp_blog.push(value);
+                        }
+                    });
+                    blog = _.reverse(_.sortBy(temp_blog, function (o) { return o.publish_date }));
+                    return blog
                 }
             },
             methods: {
