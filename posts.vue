@@ -64,6 +64,7 @@
                     'findBlogByName'
                 ]),
                 postList() {
+                    console.log("blog", this.blogs)
                     var blog = this.findBlogByName("What's New").posts;
                     var vm = this;
                     var temp_blog = [];
