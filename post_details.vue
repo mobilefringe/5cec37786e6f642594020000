@@ -88,8 +88,8 @@
                         this.$router.replace({ name: 'posts' });
                     } else {
                         console.log("this.currentPost.image_url", this.currentPost.image_url)
-                        if (this.currentPost.image_url) {
-                            
+                        if (_.includes(this.currentPost.image_url, 'missing')) {
+                            this.currentPost.image_url = "";
                         }
                     }
                 },
