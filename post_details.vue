@@ -99,7 +99,7 @@
                 },
 				shareURL(slug) {
                     var share_url = window.location.href
-                    consol.elog("share_url", share_url)
+                    console.log("share_url", share_url)
                     return share_url
                 }
             }
