@@ -86,6 +86,11 @@
                     this.currentPost = this.findBlogPostBySlug(blogName, id);
                     if (this.currentPost === null || this.currentPost === undefined) {
                         this.$router.replace({ name: 'posts' });
+                    } else {
+                        console.log("this.currentPost.image_url", this.currentPost.image_url)
+                        if (this.currentPost.image_url) {
+                            
+                        }
                     }
                 },
                 truncate(val_body) {
