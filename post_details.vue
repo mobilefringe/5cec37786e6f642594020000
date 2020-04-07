@@ -50,7 +50,8 @@
     </div>
 </template>
 <script>
-    define(["Vue", "vuex", "moment", "moment-timezone", "vue-moment", "vue!inside_banner.vue", "vue-social-sharing"], function (Vue, Vuex, moment, tz, VueMoment, insideBanner, SocialSharing) {
+    define(["Vue", "vuex", "moment", "moment-timezone", "vue-moment", "vue!inside_banner.vue", "vue!side_image.vue", "vue-lazy-load",  "vue-social-sharing", "json!site.json"], function(Vue, Vuex, moment, tz, VueMoment, insideBanner, sideImage, VueLazyload, SocialSharing, site) {
+        Vue.use(VueLazyload);
         Vue.component('social-sharing', SocialSharing);
         return Vue.component("post-details-component", {
             template: template, // the variable template will be injected,
