@@ -87,7 +87,6 @@
                     if (this.currentPost === null || this.currentPost === undefined) {
                         this.$router.replace({ name: 'posts' });
                     } else {
-                        console.log("this.currentPost.image_url", this.currentPost.image_url)
                         if (_.includes(this.currentPost.image_url, 'missing')) {
                             this.currentPost.image_url = "";
                         }
