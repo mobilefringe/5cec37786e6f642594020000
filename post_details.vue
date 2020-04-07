@@ -19,7 +19,7 @@
                             <hr>
                             <div class="promo_desc margin_40" v-html="currentPost.html_body"></div>
                             <hr>
-                            <social-sharing v-if="currentPost" :url="shareURL(currentPost.slug)" :title="currentPost.title" :description="currentPost.body" :quote="truncate(currentPost.body)" inline-template>
+                            <social-sharing v-if="currentPost" :url="shareURL(currentPost.slug)" :title="currentPost.title" :description="currentPost.body" :quote="truncate(currentPost.body)" :media="currentPost.image_url" inline-template>
                                 <div class="social_share">
                                     <p>Share</p>
                                     <network network="facebook">
