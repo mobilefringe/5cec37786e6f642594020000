@@ -19,7 +19,7 @@
                             <hr>
                             <div class="promo_desc margin_40" v-html="currentPost.html_body"></div>
                             <hr>
-                            <social-sharing v-if="currentPost" :url="shareURL(currentPost.slug)" :title="currentPost.title" :description="currentPost.body" :quote="truncate(currentPost.body)" :media="currentPost.image_url" inline-template>
+                            <social-sharing v-if="currentPost" :url="shareURL(currentPost.slug)" :title="currentPost.name" :description="currentPost.body" :quote="truncate(currentPost.body)" :media="currentPost.image_url" inline-template>
                                 <div class="social_share">
                                     <p>Share</p>
                                     <network network="facebook">
@@ -30,6 +30,18 @@
                                     </network>
                                 </div>
                             </social-sharing>
+                            
+                            <!--<social-sharing v-if="currentPost" :url="shareURL(currentPost.slug)" :title="currentPost.title" :description="currentPost.body" :quote="truncate(currentPost.body)" :media="currentPost.image_url" inline-template>-->
+                            <!--    <div class="social_share">-->
+                            <!--        <p>Share</p>-->
+                            <!--        <network network="facebook">-->
+                            <!--            <i class="fab fa-facebook"></i>-->
+                            <!--        </network>-->
+                            <!--        <network network="twitter">-->
+                            <!--            <i class="fab fa-twitter"></i>-->
+                            <!--        </network>-->
+                            <!--    </div>-->
+                            <!--</social-sharing>-->
                         </div>
                     </div>
                 </div>
@@ -98,7 +110,6 @@
                 },
 				shareURL(slug) {
                     var share_url = window.location.href
-                    console.log("share_url", share_url)
                     return share_url
                 }
             }
