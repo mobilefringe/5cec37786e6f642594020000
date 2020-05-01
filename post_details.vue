@@ -91,6 +91,10 @@
                             this.currentPost.image_url = "";
                         }
                     }
+                    
+                    if(this.currentPost.slug == "store-status-at-marketplace-at-the-enclave") {
+                        gtag('event', 'conversion', {'send_to': 'AW-718925610/62gqCO-FhcYBEKre59YC'});
+                    }
                 },
                 truncate(val_body) {
                     var truncate = _.truncate(val_body, { 'length': 99, 'separator': ' ' });
